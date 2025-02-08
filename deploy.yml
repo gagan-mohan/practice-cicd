@@ -21,7 +21,7 @@ jobs:
           SOURCE: "./"
           REMOTE_HOST: ec2-65-0-6-242.ap-south-1.compute.amazonaws.com
           REMOTE_USER: ubuntu
-          TARGET: ./practice
+          TARGET: practice-cicd
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -32,11 +32,11 @@ jobs:
           script: |
 
             # Navigate to the project directory
-            cd ./practice
+            cd practice-cicd
 
             # Install project dependencies
             npm install
-            
+
             # Build the project
             # npm run build
 
