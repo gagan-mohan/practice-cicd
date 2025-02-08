@@ -23,16 +23,7 @@ jobs:
           REMOTE_USER: ubuntu
           TARGET: practice-cicd
 
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SOURCE: "./"
-          REMOTE_HOST: ec2-65-0-6-242.ap-south-1.compute.amazonaws.com
-          REMOTE_USER: ubuntu
-          TARGET: practice-cicd
+     
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -43,7 +34,9 @@ jobs:
           script: |
 
             # Navigate to the project directory
+            ls
             cd practice-cicd
+            ls
 
             # Install project dependencies
             npm install
