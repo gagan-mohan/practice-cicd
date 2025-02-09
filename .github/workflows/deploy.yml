@@ -3,44 +3,23 @@ name: Push-to-EC2 instance
 on:
   push:
     branches:
-      - main
-
+        - main
 jobs:
-  deploy:
-    name: Push to EC2
-    runs-on: ubuntu-latest
+      deploy:
+        name: Push to EC2
+        runs-on: ubuntu-latest
+        steps:
+         - name: Checkout the code
+         uses: actions/checkout@v2
+         - name: executing remote ssh commands using password
+         uses: appleboy/ssh-action@v1.2.0	
+         with:
+         host: 13.127.14.79
+         usernane: ubuntu
+         key: ${{secrets.EC2_SSH_KEY}}
+         port: 22
+         script: |
+          ls
 
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
 
-      - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SOURCE: "./"
-          REMOTE_HOST: ec2-65-0-6-242.ap-south-1.compute.amazonaws.com
-          REMOTE_USER: ubuntu
-          TARGET: practice-cicd
-
-      - name: Executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
-        with:
-          host: ec2-65-0-6-242.ap-south-1.compute.amazonaws.com
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-
-            # Navigate to the project directory
-            ls
-            cd practice-cicd
-            ls
-            # Install project dependencies
-            npm install
-
-            # Build the project
-            # npm run build
-
-            # run index.js
-            node index.js
-            
+          
