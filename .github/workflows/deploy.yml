@@ -17,11 +17,11 @@ jobs:
       with:
        host: ec2-65-0-6-242.ap-south-1.compute.amazonaws.com
        username: ubuntu
-       key: ${{secrets.EC2_SSH_KEY}}
+       key: ${{ secrets.EC2_SSH_KEY }}
        port: 22
        script: |
           ls
           cd practice-cicd
           git pull origin main
-          npm install
+          source ~/.bashrc && npm install
           node index.js
